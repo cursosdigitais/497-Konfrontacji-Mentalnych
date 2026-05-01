@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>497 Konfrontacji Mentalnych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & VARIABLES ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#111827;
+  --bg-deep:#0a0f1a;
+  --bg-card:rgba(0,0,0,0.35);
+  --gold:#c9a84c;
+  --gold-light:#e2c97e;
+  --gold-dim:rgba(201,168,76,0.3);
+  --red:#e8192c;
+  --text:#e8e4dc;
+  --text-dim:rgba(232,228,220,0.55);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'DM Sans',-apple-system,Helvetica,Arial,sans-serif;
+  --max:780px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{text-decoration:none;color:inherit}
+
+/* ========== URGENCY BAR ========== */
+.urgency-bar{
+  width:100%;background:linear-gradient(135deg,#c0112b 0%,#e8192c 50%,#c0112b 100%);
+  background-size:200% 200%;animation:gradShift 4s ease infinite;
+  padding:8px 12px;display:flex;align-items:center;justify-content:center;gap:8px;
+  position:fixed;top:0;left:0;z-index:99999;height:42px;
+  box-shadow:0 2px 15px rgba(200,10,30,0.4);overflow:hidden;
+}
+.urgency-bar::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);
+  animation:shimmer 3s ease-in-out infinite;pointer-events:none}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes shimmer{0%{left:-100%}100%{left:150%}}
+.ub-fire{font-size:14px;animation:pulse .8s ease-in-out infinite alternate;flex-shrink:0}
+@keyframes pulse{0%{transform:scale(1);opacity:.75}100%{transform:scale(1.2);opacity:1}}
+.ub-dot{width:6px;height:6px;background:#ffe04a;border-radius:50%;animation:blink 1s ease-in-out infinite;box-shadow:0 0 6px rgba(255,224,74,.8);flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.ub-text{font-family:var(--sans);font-weight:700;color:#fff;font-size:12px;letter-spacing:.3px;text-transform:uppercase;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+.ub-timer{font-family:'SF Mono',Consolas,'Courier New',monospace;font-weight:700;font-size:13px;color:#fff;background:rgba(0,0,0,.3);border-radius:4px;padding:2px 7px;letter-spacing:1.5px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(255,255,255,.1)}
+.ub-timer .sep{animation:blink 1s step-end infinite}
+
+/* ========== SOCIAL PROOF BADGE ========== */
+.sp-wrap{display:flex;justify-content:center;padding:16px 12px 8px}
+.sp-badge{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px 10px;
+  padding:10px 24px;background:rgba(0,0,0,.45);border:1px solid rgba(196,168,75,.35);
+  border-radius:50px;box-shadow:0 0 20px rgba(196,168,75,.06)}
+.sp-badge .stars{color:var(--gold);font-size:15px;letter-spacing:1px}
+.sp-badge .score{font-weight:700;font-size:15px;color:var(--gold)}
+.sp-badge .dot{width:4px;height:4px;border-radius:50%;background:var(--gold-dim);flex-shrink:0}
+.sp-badge .info{font-size:13px;color:var(--text-dim);white-space:nowrap}
+.sp-badge .info b{color:rgba(255,255,255,.8);font-weight:600}
+
+/* ========== LAYOUT HELPERS ========== */
+.container{max-width:var(--max);margin:0 auto;padding:0 20px}
+.spacer{height:42px}
+section{padding:60px 0}
+.text-center{text-align:center}
+
+/* ========== TYPOGRAPHY ========== */
+.headline{font-family:var(--serif);font-weight:700;font-size:clamp(28px,5.5vw,52px);line-height:1.15;color:var(--text);text-align:center;margin-bottom:16px}
+.headline em{color:var(--gold-light);font-style:italic}
+.subheadline{font-size:clamp(15px,2.5vw,19px);color:var(--text-dim);text-align:center;max-width:600px;margin:0 auto 32px;line-height:1.6}
+.section-title{font-family:var(--serif);font-weight:700;font-size:clamp(24px,4.5vw,40px);line-height:1.2;text-align:center;margin-bottom:12px;color:var(--text)}
+.section-subtitle{font-size:clamp(14px,2vw,17px);color:var(--text-dim);text-align:center;max-width:560px;margin:0 auto 40px;line-height:1.6}
+.gold-text{color:var(--gold-light)}
+
+/* ========== HERO & MOCKUPS ========== */
+.hero{padding-top:30px;padding-bottom:40px}
+.hero-mockup{width:100%;max-width:420px;height:auto;margin:0 auto;display:block;filter:drop-shadow(0 20px 60px rgba(0,0,0,.6))}
+
+/* ========== INTERACTIVE DEMO ========== */
+.demo-section{background:var(--bg-deep);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+.demo-cta-label{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:50px;padding:8px 20px;margin-bottom:28px;animation:ctaPulse 2s ease-in-out infinite}
+.demo-cta-label .hand{font-size:18px;animation:point 1s ease-in-out infinite alternate}
+.demo-cta-label span{font-size:14px;font-weight:700;color:var(--gold-light);letter-spacing:.3px}
+@keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.2)}50%{box-shadow:0 0 0 10px rgba(201,168,76,0)}}
+@keyframes point{0%{transform:translateY(0)}100%{transform:translateY(-3px)}}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:560px;margin:0 auto}
+.demo-card{background:var(--bg-card);border:2px dashed rgba(255,255,255,.12);border-radius:14px;padding:20px 16px;cursor:pointer;transition:all .3s ease;text-align:center;position:relative;user-select:none}
+.demo-card:hover{border-color:var(--gold);border-style:solid;transform:translateY(-3px);box-shadow:0 8px 30px rgba(201,168,76,.12)}
+.demo-card.selected{border-color:var(--gold);border-style:solid;background:rgba(201,168,76,.08);box-shadow:0 0 20px rgba(201,168,76,.1)}
+.demo-check{position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:6px;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;transition:all .3s;font-size:12px;color:transparent}
+.demo-card:hover .demo-check{border-color:var(--gold-dim)}
+.demo-card.selected .demo-check{background:var(--gold);border-color:var(--gold);color:#000;font-weight:700}
+.demo-icon{font-size:28px;margin-bottom:8px}
+.demo-label{font-weight:600;font-size:14px;color:var(--text);margin-bottom:4px}
+.demo-desc{font-size:12px;color:var(--text-dim);line-height:1.4}
+.demo-question{font-family:var(--serif);font-size:clamp(17px,3vw,22px);font-weight:600;color:var(--gold-light);text-align:center;margin-bottom:20px;line-height:1.4;font-style:italic}
+
+/* Confronto Reveal */
+.confronto-reveal{max-width:560px;margin:28px auto 0;opacity:0;max-height:0;overflow:hidden;transition:all .6s cubic-bezier(.4,0,.2,1)}
+.confronto-reveal.visible{opacity:1;max-height:800px}
+.confronto-card{background:linear-gradient(160deg,rgba(201,168,76,.06) 0%,rgba(0,0,0,.4) 100%);border:1px solid rgba(201,168,76,.25);border-radius:18px;overflow:hidden}
+.confronto-header{padding:18px 22px 14px;border-bottom:1px solid rgba(201,168,76,.1)}
+.confronto-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--gold);background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:4px 14px;margin-bottom:8px;text-transform:uppercase}
+.confronto-viés{font-family:var(--sans);font-size:13px;color:var(--text-dim)}
+.confronto-viés strong{color:var(--text)}
+.confronto-body{padding:22px}
+.confronto-pergunta{font-family:var(--serif);font-size:clamp(18px,3vw,24px);font-weight:600;color:var(--text);line-height:1.4;margin-bottom:16px;position:relative;padding-left:18px}
+.confronto-pergunta::before{content:'"';position:absolute;left:0;top:-4px;font-size:32px;color:var(--gold);font-family:var(--serif);line-height:1}
+.confronto-reflexao{font-size:14px;color:var(--text-dim);line-height:1.7;padding:14px 16px;background:rgba(255,255,255,.03);border-radius:10px;border-left:3px solid var(--gold-dim)}
+.confronto-footer{padding:16px 22px 20px;text-align:center;border-top:1px solid rgba(255,255,255,.04)}
+.confronto-footer p{font-size:13px;color:var(--text-dim);margin-bottom:12px}
+.confronto-footer p strong{color:var(--text)}
+.confronto-cta{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,var(--gold),#a8872e);color:#000;font-size:13px;font-weight:700;letter-spacing:.5px;border-radius:50px;text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(201,168,76,.25)}
+.confronto-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.35)}
+
+/* ========== BENEFITS ========== */
+.benefits-list{display:flex;flex-direction:column;gap:20px;max-width:620px;margin:0 auto}
+.benefit-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:14px;transition:border-color .3s}
+.benefit-item:hover{border-color:var(--gold-dim)}
+.benefit-icon{font-size:28px;flex-shrink:0;width:40px;text-align:center}
+.benefit-title{font-weight:700;font-size:15px;color:var(--text);margin-bottom:4px}
+.benefit-desc{font-size:14px;color:var(--text-dim);line-height:1.5}
+
+/* ========== FLEXIBLE USE CALLOUT ========== */
+.callout{max-width:620px;margin:40px auto 0;padding:24px;background:rgba(232,25,44,.06);border:1px solid rgba(232,25,44,.2);border-radius:14px;text-align:center}
+.callout-icon{font-size:22px;margin-bottom:8px}
+.callout p{font-size:14px;color:var(--text-dim);line-height:1.6}
+.callout strong{color:var(--text);font-weight:600}
+.callout .highlight{color:var(--gold-light);font-weight:600}
+
+/* ========== BOOK SLIDER ========== */
+.slider-section{background:var(--bg-deep);overflow:hidden}
+.slider-track{display:flex;gap:20px;animation:scroll 20s linear infinite;width:max-content;padding:20px 0}
+.slider-track:hover{animation-play-state:paused}
+.slider-track img{width:280px;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.5);flex-shrink:0;height:auto;}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ========== VOLUMES ========== */
+.vol-list{display:flex;flex-direction:column;gap:12px;max-width:620px;margin:0 auto}
+.vol-item{padding:16px 20px;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:12px;font-size:15px;color:var(--text-dim);line-height:1.5;transition:border-color .3s}
+.vol-item:hover{border-color:var(--gold-dim)}
+.vol-item span{font-size:20px;margin-right:8px}
+.vol-item strong{color:var(--text);font-weight:600}
+.vol-extra{text-align:center;margin-top:24px;font-size:14px;color:var(--text-dim);line-height:1.7;max-width:560px;margin-left:auto;margin-right:auto}
+.vol-extra strong{color:var(--gold-light)}
+
+/* ========== SCIENCE SECTION ========== */
+.science-section{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;padding:80px 0}
+.science-bg{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:100%;min-width:1000px;height:100%;object-fit:cover;opacity:.25;pointer-events:none}
+.science-content{position:relative;z-index:2;width:100%}
+.science-text{font-size:15px;color:var(--text-dim);line-height:1.7;text-align:center;max-width:600px;margin:0 auto 30px}
+.quote-block{max-width:560px;margin:0 auto;padding:24px 28px;border-left:3px solid var(--gold);background:rgba(201,168,76,.04);border-radius:0 12px 12px 0}
+.quote-block p{font-family:var(--serif);font-size:clamp(16px,2.5vw,20px);font-style:italic;color:var(--text);line-height:1.5;margin-bottom:8px}
+.quote-block cite{font-family:var(--sans);font-size:13px;color:var(--gold);font-style:normal}
+
+/* ========== FOR WHOM ========== */
+.for-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:620px;margin:0 auto}
+.for-card{padding:28px 22px;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:16px;text-align:center;transition:border-color .3s}
+.for-card:hover{border-color:var(--gold-dim)}
+.for-card h3{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--gold-light);margin-bottom:10px}
+.for-card p{font-size:13px;color:var(--text-dim);line-height:1.6}
+
+/* ========== BONUS ========== */
+.bonus-section{background:var(--bg-deep)}
+.bonus-grid{display:flex;flex-direction:column;gap:20px;max-width:620px;margin:0 auto}
+.bonus-card{display:flex;gap:18px;align-items:center;padding:20px;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:16px;transition:border-color .3s}
+.bonus-card:hover{border-color:var(--gold-dim)}
+.bonus-img{width:150px;height:150px;border-radius:12px;object-fit:cover;flex-shrink:0;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.bonus-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:2px 10px;margin-bottom:6px}
+.bonus-name{font-weight:700;font-size:15px;color:var(--text);margin-bottom:4px}
+.bonus-desc{font-size:13px;color:var(--text-dim);line-height:1.5}
+
+/* ========== TESTIMONIALS GALLERY ========== */
+.testimonials-section{overflow:hidden}
+.test-scroll{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:10px 20px 20px;scrollbar-width:none}
+@media(min-width:1200px){.test-scroll{justify-content:center}}
+.test-scroll::-webkit-scrollbar{display:none}
+.test-card{flex-shrink:0;width:280px;scroll-snap-align:start;border-radius:14px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.06)}
+.test-card img{width:100%;height:auto;display:block;}
+
+/* ========== REVIEWS TEXT ========== */
+.reviews-wrap{max-width:620px;margin:30px auto 0;display:flex;flex-direction:column;gap:16px}
+.review-card{padding:20px;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:14px}
+.review-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.review-avatar{width:40px;height:40px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:var(--gold);flex-shrink:0}
+.review-name{font-weight:600;font-size:14px;color:var(--text)}
+.review-verified{font-size:11px;color:#34d399;margin-left:4px}
+.review-stars{color:var(--gold);font-size:12px;letter-spacing:1px}
+.review-text{font-size:13px;color:var(--text-dim);line-height:1.6}
+
+/* ========== PRICING ========== */
+.pricing-section{background:var(--bg-deep);position:relative;overflow:hidden}
+.pricing-section::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none}
+.pricing-box{max-width:480px;margin:0 auto;text-align:center;position:relative;z-index:2}
+.pricing-mockup{width:100%;max-width:380px;height:auto;margin:0 auto 30px;display:block;filter:drop-shadow(0 15px 50px rgba(0,0,0,.5))}
+.pricing-timer-label{font-size:14px;color:var(--red);font-weight:600;margin-bottom:4px}
+.pricing-timer{font-family:'SF Mono',Consolas,monospace;font-size:22px;font-weight:700;color:#fff;background:rgba(232,25,44,.15);border:1px solid rgba(232,25,44,.3);display:inline-block;padding:6px 16px;border-radius:8px;letter-spacing:2px;margin-bottom:24px}
+.pricing-timer .sep{animation:blink 1s step-end infinite}
+.price-old{font-size:18px;color:var(--text-dim);text-decoration:line-through;margin-bottom:4px}
+.price-label{font-size:15px;color:var(--text-dim);margin-bottom:4px}
+.price-new{font-family:var(--serif);font-size:clamp(80px,10vw,72px);font-weight:700;color:var(--gold-light);line-height:1;margin-bottom:6px}
+.price-new sup{font-size:.4em;top:-.5em;position:relative}
+.cta-btn{display:inline-block;width:100%;max-width:400px;padding:18px 32px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-family:var(--sans);font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:1px;border:none;border-radius:12px;cursor:pointer;transition:all .3s;box-shadow:0 6px 30px rgba(34,197,94,.3);margin:20px 0 12px;position:relative;overflow:hidden;text-decoration:none;}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(34,197,94,.4)}
+.cta-btn::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);animation:shimmer 2.5s ease-in-out infinite}
+.cta-sub{font-size:13px;color:var(--text-dim);margin-bottom:16px}
+.pricing-rating{font-size:14px;color:var(--text-dim)}
+.pricing-rating .stars{color:var(--gold);margin-right:4px}
+
+/* ========== GUARANTEE ========== */
+.guarantee{max-width:560px;margin:0 auto;padding:32px;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:18px;text-align:center}
+.guarantee-icon{font-size:48px;margin-bottom:12px}
+.guarantee h3{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--text);margin-bottom:12px}
+.guarantee p{font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:20px}
+.guarantee .cta-btn{max-width:340px}
+
+/* ========== FOOTER ========== */
+footer{padding:30px 20px;text-align:center;border-top:1px solid rgba(255,255,255,.04)}
+footer p{font-size:12px;color:rgba(255,255,255,.25)}
+
+/* ========== PURCHASE NOTIFICATIONS ========== */
+.notif{position:fixed;bottom:20px;left:20px;z-index:99998;background:#fff;border-radius:14px;padding:14px 18px 14px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,.5);max-width:340px;transform:translateY(120%);opacity:0;transition:all .5s cubic-bezier(.4,0,.2,1)}
+.notif.show{transform:translateY(0);opacity:1}
+.notif-img{width:48px;height:48px;border-radius:10px;object-fit:cover;flex-shrink:0;display:block;}
+.notif-body{min-width:0}
+.notif-name{font-size:14px;font-weight:700;color:#1a1a1a;display:flex;align-items:center;gap:6px}
+.notif-badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:#059669;background:#ecfdf5;border-radius:20px;padding:1px 8px}
+.notif-badge::before{content:'✓';font-size:10px}
+.notif-action{font-size:13px;color:#555;margin-top:2px}
+.notif-time{font-size:11px;color:#999;margin-top:2px}
+
+/* ========== MOBILE ========== */
+@media(max-width:768px){
+  .hero-mockup { max-width: 80%; }
+  .pricing-mockup { max-width: 80%; }
+  
+  .science-section{min-height:auto;padding:50px 0}
+  .science-bg{width:100%;min-width:auto;height:auto;top:40px;left:0;transform:none;object-fit:contain;opacity:0.15}
+}
+@media(max-width:600px){
+  .urgency-bar{gap:5px;padding:8px 8px;height:38px}
+  .ub-text{font-size:10px}.ub-timer{font-size:11px;padding:2px 5px}.ub-fire{font-size:12px}.ub-dot{display:none}
+  .spacer{height:38px}
+  section{padding:40px 0}
+  .container{padding:0 16px}
+  .sp-badge{padding:8px 16px;gap:4px 8px}
+  .sp-badge .stars,.sp-badge .score{font-size:13px}
+  .sp-badge .info{font-size:11px}
+  .demo-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .for-grid{grid-template-columns:1fr;gap:14px}
+  .bonus-card{flex-direction:column;text-align:center;gap:12px}
+  .bonus-img{width:120px;height:120px}
+  .slider-track img{width:220px}
+  .test-card{width:240px}
+  .notif{left:12px;right:12px;max-width:none;bottom:12px}
+  .pricing-mockup{max-width:260px}
+  .hero-mockup{max-width:280px}
+}
+@media(max-width:380px){
+  .demo-grid{grid-template-columns:1fr}
+  .sp-badge .stars,.sp-badge .score{font-size:12px}
+  .sp-badge .info{font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== URGENCY BAR ===== -->
+<div class="urgency-bar">
+  <span class="ub-fire">🔥</span>
+  <span class="ub-dot"></span>
+  <span class="ub-text">Ostatnie godziny w promocyjnej cenie</span>
+  <span class="ub-timer" id="timer1">00<span class="sep">:</span>00<span class="sep">:</span>00</span>
+  <span class="ub-dot"></span>
+  <span class="ub-fire">🔥</span>
+</div>
+<div class="spacer"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+<div class="container">
+
+  <!-- Badge -->
+  <div class="sp-wrap">
+    <div class="sp-badge">
+      <span class="stars">★★★★★</span>
+      <span class="score">4.9/5</span>
+      <span class="dot"></span>
+      <span class="info">Używane przez terapeutów w <b>21 krajach</b></span>
+      <span class="dot"></span>
+      <span class="info">Ponad <b>100 000</b> profesjonalistów</span>
+    </div>
+  </div>
+
+  <h1 class="headline">497 Konfrontacji Mentalnych, aby <em>Wyeliminować Niewidzialne Blokady</em> Umysłu</h1>
+  <p class="subheadline">Kliniczny arsenał interwencji opartych na najbardziej destrukcyjnych błędach poznawczych ludzkiego umysłu</p>
+
+  <img class="hero-mockup" src="https://i.imgur.com/dwSQWEx.png" alt="497 Konfrontacji Mentalnych">
+
+  <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--text-dim);line-height:1.7;max-width:540px;margin-left:auto;margin-right:auto">
+    Każda konfrontacja została zaprojektowana, aby zmusić mózg do porzucenia niezdrowego wzorca, niezależnie od tego, czy używasz tego podczas sesji terapeutycznej, czy jako narzędzia do głębokiego samopoznania.
+  </p>
+
+</div>
+</section>
+
+<!-- ===== INTERACTIVE DEMO ===== -->
+<section class="demo-section">
+<div class="container text-center">
+  <p class="section-title" style="font-size:clamp(22px,3.5vw,26px)">Zobacz, jak to działa w praktyce:</p>
+  <p class="demo-question">Który z tych bólów pojawia się najczęściej w Twoich sesjach lub w Twoim życiu?</p>
+
+  <div class="demo-cta-label">
+    <span class="hand">👇</span>
+    <span>WYBIERZ OPCJĘ I OTRZYMAJ PRAWDZIWĄ KONFRONTACJĘ</span>
+  </div>
+
+  <div class="demo-grid">
+    <div class="demo-card" onclick="selectDemo(this,0)">
+      <div class="demo-check">✓</div>
+      <div class="demo-icon">🔁</div>
+      <div class="demo-label">Wzorzec powtarzania</div>
+      <div class="demo-desc">Pacjent, który powtarza te same błędy w miłości lub finansach</div>
+    </div>
+    <div class="demo-card" onclick="selectDemo(this,1)">
+      <div class="demo-check">✓</div>
+      <div class="demo-icon">🧊</div>
+      <div class="demo-label">Blokada racjonalna</div>
+      <div class="demo-desc">Hiper-racjonalny pacjent bez dostępu do emocji</div>
+    </div>
+    <div class="demo-card" onclick="selectDemo(this,2)">
+      <div class="demo-check">✓</div>
+      <div class="demo-icon">😰</div>
+      <div class="demo-label">Przewlekły lęk</div>
+      <div class="demo-desc">Lęk, który nie reaguje na tradycyjne techniki</div>
+    </div>
+    <div class="demo-card" onclick="selectDemo(this,3)">
+      <div class="demo-check">✓</div>
+      <div class="demo-icon">💔</div>
+      <div class="demo-label">Toksyczne relacje</div>
+      <div class="demo-desc">Przywiązanie do ludzi i sytuacji powodujących cierpienie</div>
+    </div>
+  </div>
+
+  <!-- Confronto Reveal -->
+  <div class="confronto-reveal" id="confrontoReveal">
+    <div class="confronto-card">
+      <div class="confronto-header">
+        <div class="confronto-badge">PRAWDZIWA KONFRONTACJA Z MATERIAŁU</div>
+        <div class="confronto-viés" id="confrontoVies"></div>
+      </div>
+      <div class="confronto-body">
+        <div class="confronto-pergunta" id="confrontoPergunta"></div>
+        <div class="confronto-reflexao" id="confrontoReflexao"></div>
+      </div>
+      <div class="confronto-footer">
+        <p>To jest <strong>1</strong> z <strong>497 konfrontacji</strong> w pełnym materiale.</p>
+        <a href="#preco" class="confronto-cta">CHCĘ WSZYSTKICH 497 KONFRONTACJI →</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ===== BENEFITS ===== -->
+<section>
+<div class="container">
+  <p class="section-title">Wszystko, co zyskasz dzięki<br>temu materiałowi:</p>
+  <div style="height:32px"></div>
+
+  <div class="benefits-list">
+    <div class="benefit-item">
+      <div class="benefit-icon">🧬</div>
+      <div>
+        <div class="benefit-title">Diagnoza błędów poznawczych</div>
+        <div class="benefit-desc">Zlokalizuj dokładny błąd poznawczy, w którym utknął Twój umysł i który paraliżuje Twoje wyniki.</div>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">🔐</div>
+      <div>
+        <div class="benefit-title">Przełamanie powtarzalności</div>
+        <div class="benefit-desc">Przestań powtarzać te same finansowe i miłosne błędy, rozbrajając autosabotaż bezpośrednio u jego źródła.</div>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">⚡</div>
+      <div>
+        <div class="benefit-title">Natychmiastowa jasność</div>
+        <div class="benefit-desc">Tom 1 od razu po pierwszym przeczytaniu uwalnia od przewlekłego poczucia winy i ciężaru złych decyzji z przeszłości.</div>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">👁️</div>
+      <div>
+        <div class="benefit-title">Audyt Ego</div>
+        <div class="benefit-desc">Przejrzyj kłamstwa, które sobie wmawiasz, aby usprawiedliwić własny ból, i odzyskaj kontrolę nad swoimi wyborami.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Callout -->
+  <div class="callout">
+    <div class="callout-icon">⚠️</div>
+    <p>Ten materiał może być używany elastycznie, w zależności od Twoich celów osobistych lub zawodowych.<br><br>
+    Jeśli jesteś <span class="highlight">terapeutą, psychologiem, coachem lub profesjonalistą ds. umysłu</span>,
+    te interwencje staną się katalizatorem głębokich odblokowań podczas sesji, nawet z opornymi, hiper-racjonalnymi lub emocjonalnie zablokowanymi klientami.</p>
+  </div>
+</div>
+</section>
+
+<!-- ===== BOOK SLIDER ===== -->
+<section class="slider-section">
+<div class="container">
+  <p class="section-title">Zobacz, jak materiał wygląda w środku:</p>
+  <p class="section-subtitle">Od identyfikacji pułapki mentalnej do przeformułowania i wyleczenia wzorca.</p>
+</div>
+<div style="overflow:hidden">
+  <div class="slider-track" id="sliderTrack">
+    <img src="https://i.imgur.com/Ts5aE11.png" alt="Página 1">
+    <img src="https://i.imgur.com/SNSEDIX.png" alt="Página 2">
+    <img src="https://i.imgur.com/rn16qJC.png" alt="Página 3">
+    <img src="https://i.imgur.com/rv0MJ1T.png" alt="Página 4">
+    <!-- Duplicated for seamless loop -->
+    <img src="https://i.imgur.com/Ts5aE11.png" alt="Página 1">
+    <img src="https://i.imgur.com/SNSEDIX.png" alt="Página 2">
+    <img src="https://i.imgur.com/rn16qJC.png" alt="Página 3">
+    <img src="https://i.imgur.com/rv0MJ1T.png" alt="Página 4">
+  </div>
+</div>
+</section>
+
+<!-- ===== VOLUMES ===== -->
+<section>
+<div class="container">
+  <div class="vol-list">
+    <div class="vol-item"><span>🧬</span> <strong>Tom 1: Więzienie Przeszłości</strong> — Błąd utopionych kosztów i przywiązanie do cierpienia</div>
+    <div class="vol-item"><span>🌳</span> <strong>Tom 2: Soczewka Iluzji</strong> — Błąd potwierdzenia i przekonania o braku miłości</div>
+    <div class="vol-item"><span>🌑</span> <strong>Tom 3: Strach przed Nowym</strong> — Błąd status quo i lęk przed zmianą</div>
+    <div class="vol-item"><span>⚗️</span> <strong>Tom 4: Uzależnienie od Braku</strong> — Błąd negatywności i korzenie lęku</div>
+    <div class="vol-item"><span>🔓</span> <strong>Tom 5: Syndrom Kontroli</strong> — Iluzja kontroli i toksyczność w relacjach</div>
+  </div>
+  <div class="vol-extra">
+    I więcej: <strong>Emocjonalny efekt Dunninga-Krugera</strong>, Błąd zaniechania, Efekt Halo, Kotwiczenie Traum i <strong>Dynamika Fałszywej Nadziei</strong>.
+  </div>
+</div>
+</section>
+
+<!-- ===== SCIENCE ===== -->
+<section class="science-section">
+  <img class="science-bg" src="https://i.imgur.com/1vDBerw.png" alt="">
+  <div class="container science-content">
+    <p class="section-title">Naukowe i Kliniczne Podstawy<br>Naszego Materiału</p>
+    <div style="height:24px"></div>
+    <p class="science-text">To <strong style="color:var(--text)">497 Konfrontacji Mentalnych</strong> opartych na filarach neuronauki, terapii poznawczo-behawioralnej (Aaron Beck) i ekonomii behawioralnej (Daniel Kahneman).</p>
+    <p class="science-text">To nie są przypadkowe pytania. To zdekodowany protokół kliniczny, który zmusza mózg do porzucenia niezdrowych błędów poznawczych i ujawnia to, co ego próbuje ukryć.</p>
+
+    <div class="quote-block">
+      <p>"Jesteśmy ślepi na naszą własną ślepotę. A co gorsza: nie wiemy, jak wiele nie wiemy."</p>
+      <cite>— Daniel Kahneman (Laureat Nagrody Nobla)</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOR WHOM ===== -->
+<section>
+<div class="container">
+  <p class="section-title">Dla kogo to jest?</p>
+  <div style="height:32px"></div>
+  <div class="for-grid">
+    <div class="for-card">
+      <h3>Zwykłe osoby</h3>
+      <p>Szukające wyzwolenia od powtarzających się wzorców emocjonalnych i niewidzialnych blokad, które paraliżują dobrobyt, karierę i miłość.</p>
+    </div>
+    <div class="for-card">
+      <h3>Profesjonaliści ds. umysłu</h3>
+      <p>Psycholodzy, terapeuci i coachowie, którzy chcą praktycznego narzędzia, aby dotknąć rdzenia nieświadomości i przyspieszyć diagnozę kliniczną.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ===== BONUS ===== -->
+<section class="bonus-section">
+<div class="container">
+  <p class="section-title">Kup dzisiaj i odbierz<br><span class="gold-text">5 ekskluzywnych bonusów:</span></p>
+  <div style="height:32px"></div>
+  <div class="bonus-grid">
+
+    <div class="bonus-card">
+      <img class="bonus-img" src="https://i.imgur.com/3mdlM4w.png" alt="Bonus 1">
+      <div>
+        <div class="bonus-tag">🎁 Bonus 1</div>
+        <div class="bonus-name">Nagrania audio do przygotowania i skupienia</div>
+        <div class="bonus-desc">Dudnienia różnicowe na koncentrację, towarzyszące lekturze lub do słuchania przez terapeutę przed rozpoczęciem sesji.</div>
+      </div>
+    </div>
+
+    <div class="bonus-card">
+      <img class="bonus-img" src="https://i.imgur.com/gDOmoKB.png" alt="Bonus 2">
+      <div>
+        <div class="bonus-tag">🎁 Bonus 2</div>
+        <div class="bonus-name">Kliniczny Przewodnik po Przepisywaniu Błędów</div>
+        <div class="bonus-desc">Szybka mapa: "Jeśli ból jest taki → Użyj tego błędu poznawczego → Zastosuj tę konfrontację". Naucz się precyzyjnie wdrażać materiał podczas 50-minutowych sesji.</div>
+      </div>
+    </div>
+
+    <div class="bonus-card">
+      <img class="bonus-img" src="https://i.imgur.com/Mez2iCV.png" alt="Bonus 3">
+      <div>
+        <div class="bonus-tag">🎁 Bonus 3</div>
+        <div class="bonus-name">Tracker Iluzji</div>
+        <div class="bonus-desc">Narzędzie z instrukcjami, które pozwala śledzić w ciągu tygodnia, ile razy wpadłeś w pułapkę negatywności lub błędu potwierdzenia.</div>
+      </div>
+    </div>
+
+    <div class="bonus-card">
+      <img class="bonus-img" src="https://i.imgur.com/6axgUCt.png" alt="Bonus 4">
+      <div>
+        <div class="bonus-tag">🎁 Bonus 4</div>
+        <div class="bonus-name">52 Karty Szoku Poznawczego</div>
+        <div class="bonus-desc">Wirtualna talia z 52 najpotężniejszymi metaforami z książki. Idealne do codziennej refleksji lub do wręczenia na zakończenie sesji.</div>
+      </div>
+    </div>
+
+    <div class="bonus-card">
+      <img class="bonus-img" src="https://i.imgur.com/jMKzTx6.png" alt="Bonus 5">
+      <div>
+        <div class="bonus-tag">🎁 Bonus 5</div>
+        <div class="bonus-name">Społeczność Terapeuta Przyszłości</div>
+        <div class="bonus-desc">Połącz się z terapeutami, którzy również szukają innowacji, wyrafinowanego słuchania i narzędzi klinicznych o dużym wpływie.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="text-align:center;margin-top:36px;font-size:14px;color:var(--text-dim)">Nasze narzędzia pomogły już <strong style="color:var(--text)">ponad 100 000 profesjonalistom</strong> w więcej niż <strong style="color:var(--text)">21 krajach</strong>.</p>
+</div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing-section" id="preco">
+<div class="container">
+  <div class="pricing-box">
+
+    <img class="pricing-mockup" src="https://i.imgur.com/phVOf4w.png" alt="497 Konfrontacji Mentalnych">
+
+    <div class="pricing-timer-label">Promocyjna cena startowa tylko do <span id="todayDate"></span></div>
+    <div style="margin-bottom:6px;font-size:13px;color:var(--text-dim)">Odnawia się za</div>
+    <div class="pricing-timer" id="timer2">00<span class="sep">:</span>00<span class="sep">:</span>00</div>
+
+    <div class="price-old">Z 297 zł</div>
+    <div class="price-label">za jedyne:</div>
+    <div class="price-new">97 <sup>zł</sup></div>
+
+    <a href="https://www.yoursecurepayment.site/checkouts/checkout-page-7/" class="cta-btn">KLIKNIJ TUTAJ I POBIERZ TERAZ</a>
+    <div class="cta-sub">Natychmiastowy dostęp. 7 dni gwarancji.</div>
+
+    <div class="pricing-rating">
+      <span class="stars">★★★★★</span> 4.9/5 · 73 oceny
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials-section">
+<div class="container">
+  <p class="section-title" style="margin-bottom:24px">Co mówią inni:</p>
+</div>
+<div class="test-scroll">
+  <div class="test-card"><img class="test-img" src="https://i.imgur.com/GMMdGWS.png" alt="Opinia"></div>
+  <div class="test-card"><img class="test-img" src="https://i.imgur.com/yycwoOd.png" alt="Opinia"></div>
+  <div class="test-card"><img class="test-img" src="https://i.imgur.com/xYZ9l7j.png" alt="Opinia"></div>
+  <div class="test-card"><img class="test-img" src="https://i.imgur.com/nxKx9TR.png" alt="Opinia"></div>
+</div>
+
+<!-- Written reviews -->
+<div class="container">
+  <div class="reviews-wrap">
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar">KR</div>
+        <div><div class="review-name">Karolina R. <span class="review-verified">✔ Zweryfikowana</span></div><div class="review-stars">★★★★★</div></div>
+      </div>
+      <div class="review-text">Jestem psychoterapeutką CBT, a ten materiał przetłumaczył błędy poznawcze w nierealny sposób. Użyłam dzisiaj 3 konfrontacji z bardzo opornym pacjentem i od razu się odblokował. Reakcja była niesamowita.</div>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar">MP</div>
+        <div><div class="review-name">Magdalena P. <span class="review-verified">✔ Zweryfikowana</span></div><div class="review-stars">★★★★★</div></div>
+      </div>
+      <div class="review-text">Nie jestem terapeutką, ale dostrzeżenie "blokad" w moim umyśle uzdrowiło mnie bardziej niż 2 lata kręcenia się w tym samym bólu. Konfrontacje dają nam policzek i zmuszają do porzucenia mentalności ofiary.</div>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar">AR</div>
+        <div><div class="review-name">Anna R. <span class="review-verified">✔ Zweryfikowana</span></div><div class="review-stars">★★★★★</div></div>
+      </div>
+      <div class="review-text">Uwielbiam to! Możesz kupować w ciemno... materiał jest piękny, trafia w sedno i jest bardzo przydatny. Gratuluję wspaniałej pracy.</div>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar">AG</div>
+        <div><div class="review-name">Agnieszka G. <span class="review-verified">✔ Zweryfikowana</span></div><div class="review-stars">★★★★★</div></div>
+      </div>
+      <div class="review-text">Ludzie!! Cóż za idealny materiał... Używam go w pracy z pacjentami jako narzędzia do pogłębiania procesu. Sposób, w jaki autor łączy psychologiczne błędy poznawcze z prawdziwym bólem osoby, jest genialny. Jest głęboki, pełen szacunku i transformujący.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ===== GUARANTEE ===== -->
+<section>
+<div class="container">
+  <div class="guarantee">
+    <div class="guarantee-icon">🛡️</div>
+    <h3>Bezwarunkowa Gwarancja</h3>
+    <p>Jeśli podczas kolejnych 7 sesji nie poczujesz, że zapanowałeś nad umysłami swoich pacjentów (lub własnym) jak nigdy dotąd, wyślij nam e-mail, a zwrócimy Ci każdego centa — bez zadawania pytań.</p>
+    <a href="https://www.yoursecurepayment.site/checkouts/checkout-page-7/" class="cta-btn">POBIERZ TERAZ</a>
+  </div>
+</div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>Terapeuta Przyszłości © Copyright – Wszelkie prawa zastrzeżone.</p>
+</footer>
+
+<!-- ===== PURCHASE NOTIFICATION ===== -->
+<div class="notif" id="notif">
+  <img class="notif-img" src="https://i.imgur.com/dwSQWEx.png" alt="Notyfikacja">
+  <div class="notif-body">
+    <div class="notif-name"><span id="notifName">Piotr</span>, <span id="notifCity">Warszawa</span> <span class="notif-badge">Zweryfikowany</span></div>
+    <div class="notif-action">właśnie kupił(a)</div>
+    <div class="notif-time" id="notifTime">3 minuty temu</div>
+  </div>
+</div>
+
+<script>
+/* ===== CURRENT DATE & COUNTDOWN ===== */
+const tDate = new Date();
+const dateEl = document.getElementById('todayDate');
+if(dateEl) {
+  dateEl.innerText = String(tDate.getDate()).padStart(2,'0') + '.' + String(tDate.getMonth()+1).padStart(2,'0') + '.' + tDate.getFullYear();
+}
+
+function updateTimers(){
+  const now=new Date(),end=new Date();end.setHours(23,59,59,999);
+  const d=Math.max(0,end-now);
+  const h=String(Math.floor(d/36e5)).padStart(2,'0');
+  const m=String(Math.floor((d%36e5)/6e4)).padStart(2,'0');
+  const s=String(Math.floor((d%6e4)/1e3)).padStart(2,'0');
+  const html=h+'<span class="sep">:</span>'+m+'<span class="sep">:</span>'+s;
+  document.getElementById('timer1').innerHTML=html;
+  document.getElementById('timer2').innerHTML=html;
+}
+updateTimers();setInterval(updateTimers,1000);
+
+/* ===== DEMO CONFRONTO SELECTION ===== */
+const confrontos=[
+  {
+    vies:'Błąd <strong>Utarionych Kosztów</strong> — Tom 1: Więzienie Przeszłości',
+    pergunta:'Wyobraź sobie, że kupiłeś drogi bilet na film. Po 40 minutach okazuje się, że film jest okropny. Zostałbyś do końca tylko dlatego, że już za niego zapłaciłeś? W prawdziwym życiu robisz to od lat — pozostajesz w związku, w pracy, w schemacie bólu... tylko dlatego, że "już tyle zainwestowałeś". Pytanie brzmi: jak dużą część swojego życia zamierzasz jeszcze zmarnować, oglądając film, który sprawia, że cierpisz?',
+    reflexao:'Twój mózg oszukuje Cię, mówiąc: "dałem z siebie tak wiele, nie mogę teraz przestać". Ale czas, który już straciłeś, nie wróci — przepadł. Jedyną rzeczą, którą w pełni kontrolujesz, jest to, czy będziesz go tracić dalej.'
+  },
+  {
+    vies:'Błąd <strong>Potwierdzenia</strong> — Tom 2: Soczewka Iluzji',
+    pergunta:'To tak, jakbyś żył w ciemnych okularach i mówił: "udowodniono, że świat jest mroczny". Nigdy ich nie zdjąłeś, żeby to sprawdzić. Od lat Twój umysł gromadzi wszystkie dowody na to, że nie potrafisz, nie zasługujesz, nie dajesz rady. Ale powiedz mi jedno: czy kiedykolwiek szukałeś z takim samym zaangażowaniem dowodów na to, że jednak potrafisz?',
+    reflexao:'Nie jesteś racjonalny — jesteś selektywny. Twój umysł działa jak skorumpowany prawnik: przedstawia tylko te dowody, które potwierdzają wyrok, o którym już zadecydował. A Ty uwierzyłeś w ten wyrok, nie kwestionując sędziego.'
+  },
+  {
+    vies:'Błąd <strong>Negatywności</strong> — Tom 4: Uzależnienie od Braku',
+    pergunta:'Twojemu umysłowi udało się utrzymać lęk przy życiu przez 5, 10, 15 lat — bez zapominania, bez porażek, bez brania dnia wolnego. Jest niesamowicie potężny. A teraz odpowiedz mi: skoro jest tak kompetentny w utrzymywaniu strachu z doskonałą precyzją... dlaczego myślisz, że nie byłby w stanie utrzymać przy życiu nowej historii, gdybyś dał mu coś innego do zapamiętania?',
+    reflexao:'Problemem nie jest to, że Twój umysł jest słaby. Zbyt długo pozwalałeś mu pracować tylko dla złej strony. Ta sama maszyna, która karmi Twój strach, jest w stanie karmić nowe życie.'
+  },
+  {
+    vies:'<strong>Iluzja Kontroli</strong> — Tom 5: Syndrom Kontroli',
+    pergunta:'Wyobraź sobie, że codziennie sadzisz nasiono w betonie. Codziennie je podlewasz, pielęgnujesz, czekasz. I codziennie nic nie rośnie. Wtedy ktoś pyta: "Dlaczego nie posadzisz w ziemi?", a Ty odpowiadasz: "Bo już zmarnowałem tutaj za dużo wody". Gdybyś wiedział — ze 100% pewnością — że ta osoba nigdy się nie zmieni, ani za rok, ani za 5, ani za 20 lat... jak długo jeszcze podlewałbyś ten beton?',
+    reflexao:'Nie walczysz o ten związek. Walczysz z rzeczywistością. A rzeczywistość zawsze wygrywa. Twój ból nie wynika z końca miłości — wynika z tego, że uświadamiasz sobie, że to już dawno minęło, a Ty trwałeś w tym ze strachu przed pustką.'
+  }
+];
+
+function selectDemo(el,idx){
+  document.querySelectorAll('.demo-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  const c=confrontos[idx];
+  document.getElementById('confrontoVies').innerHTML=c.vies;
+  document.getElementById('confrontoPergunta').textContent=c.pergunta;
+  document.getElementById('confrontoReflexao').textContent=c.reflexao;
+  const reveal=document.getElementById('confrontoReveal');
+  reveal.classList.add('visible');
+  setTimeout(()=>{reveal.scrollIntoView({behavior:'smooth',block:'nearest'})},100);
+}
+
+const buyers=[
+  {name:"Piotr",city:"Warszawa"},
+  {name:"Anna",city:"Kraków"},
+  {name:"Michał",city:"Wrocław"},
+  {name:"Katarzyna",city:"Poznań"},
+  {name:"Tomasz",city:"Gdańsk"},
+  {name:"Magdalena",city:"Łódź"},
+  {name:"Krzysztof",city:"Szczecin"},
+  {name:"Agnieszka",city:"Bydgoszcz"},
+  {name:"Marcin",city:"Lublin"}
+];
+const times=["właśnie teraz","2 minuty temu","5 minut temu","8 minut temu","12 minut temu","15 minut temu","18 minut temu"];
+const notifEl=document.getElementById('notif');
+const notifName=document.getElementById('notifName');
+const notifCity=document.getElementById('notifCity');
+const notifTime=document.getElementById('notifTime');
+let notifIndex=0;
+
+function showNotification(){
+  const b=buyers[notifIndex%buyers.length];
+  const t=times[Math.floor(Math.random()*times.length)];
+  notifName.textContent=b.name;
+  notifCity.textContent=b.city;
+  notifTime.textContent=t;
+  notifEl.classList.add('show');
+  setTimeout(()=>{notifEl.classList.remove('show')},5000);
+  notifIndex++;
+}
+
+// First notification after 8s, then every 15-25s random
+setTimeout(()=>{
+  showNotification();
+  setInterval(()=>{showNotification()},15000+Math.random()*10000);
+},8000);
+</script>
+
+</body>
+</html>
